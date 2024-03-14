@@ -1,0 +1,21 @@
+@startuml Disconnecting PulseWave
+
+scale 3
+
+autonumber
+actor User as User
+
+User -> ChartChangeView: tap disconnect button
+ChartChangeView -> PulseWaveAppController: disconnectDevice
+PulseWaveAppController -> BluetoothUartService: cancelPeripheralConnection
+BluetoothUartService -> PulseWaveAppController: didDisconnectPeripheral
+PulseWaveAppController -> PulseWaveAppController: reset measuredChartData
+PulseWaveAppController -> PulseWaveAppController: reset filteredChartData
+PulseWaveAppController -> PulseWaveAppController: reset firstDerivativeChartData
+PulseWaveAppController -> PulseWaveAppController: reset secondDerivativeChartData
+PulseWaveAppController -> PulseWaveAppController: chartDataSubject send measuredChartData
+PulseWaveAppController -> PulseWaveAppController: reset recordingData
+PulseWaveAppController -> PulseWaveAppController: remove snrData
+PulseWaveAppController -> PulseWaveAppController: remove rrData
+PulseWaveAppController -> ConnectView: connectPhase
+bvfjnvb
